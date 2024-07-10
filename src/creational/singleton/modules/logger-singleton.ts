@@ -1,25 +1,22 @@
+import { LoggerService } from "./logger";
+
+// Perceba que "_instance" não deve ser do tipo da própria classe singleton (LoggerSingleton).
+// Ela pode ser ser qualquer classe, nesse exemplo, é a classe LoggerService.
+// Isso é o que torna o Singleton flexível, pois você pode usar qualquer classe que desejar.
+// Dessa forma, a lógica do objeto _instance fica encapsulada dentro da sua própria classe.
+// A classe singleton não lida com a lógica do objeto "_instance", apenas com a lógica de criação dele.
 export class LoggerSingleton {
-  private log: string[] = [];
-
-  public addLog(log: string): void {
-    this.log.push(log);
-  }
-
-  public showLogs(): void {
-    console.log(this.log);
-  }
-
   // singleton instance
-  private static _instance?: LoggerSingleton;
+  private static _instance?: LoggerService;
 
   // private constructor to avoid client applications to use constructor
   private constructor() {}
 
   // singleton implementation
-  public static getInstance(): LoggerSingleton {
+  public static getInstance(): LoggerService {
     if (!LoggerSingleton._instance) {
-      LoggerSingleton._instance = new LoggerSingleton();
+      LoggerSingleton._instance = new LoggerService();
     }
-    return LoggerSingleton._instance
+    return LoggerSingleton._instance;
   }
 }
